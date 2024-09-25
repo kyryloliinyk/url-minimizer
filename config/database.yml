@@ -1,0 +1,18 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= Rails.application.credentials.dig(:db, :pool) %>
+  username: <%= ENV['DB_USERNAME'] || Rails.application.credentials.dig(:db, :username) %>
+  password: <%= ENV['DB_PASSWORD'] || Rails.application.credentials.dig(:db, :password) %>
+
+development:
+  <<: *default
+  database: url_minimizer_development
+
+test:
+  <<: *default
+  database: url_minimizer_test
+
+production:
+  <<: *default
+  database: url_minimizer_production
