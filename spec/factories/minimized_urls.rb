@@ -3,5 +3,6 @@
 FactoryBot.define do
   factory :minimized_url do
     sequence(:origin) { |n| "#{FFaker::Internet.http_url}-#{n}" }
+    sequence(:short) { |n| "#{FFaker::Internet.http_url}-#{n}" }
   end
 end

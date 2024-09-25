@@ -2,17 +2,22 @@
 
 # Represents shortened link entity with additional attrs
 class MinimizedUrl < ApplicationRecord
-  validates :origin, presence: true, uniqueness: true
-  validate :origin_must_be_valid_url
+  validates :origin, presence: true, uniqueness: { case_sensitive: false }
+  validates :short, presence: true, uniqueness: { case_sensitive: false }
+  validate :validate_urls
 
   private
 
-  def origin_must_be_valid_url
-    uri = URI.parse(origin)
-    unless uri.is_a?(URI::HTTP) || uri.is_a?(URI::HTTPS)
-      errors.add(:origin, 'must be a valid HTTP or HTTPS URL')
-    end
+  def validate_urls
+    validate_url_format(:origin)
+    validate_url_format(:short)
+  end
+
+  def validate_url_format(attribute)
+    value = self[attribute]
+    uri = URI.parse(value)
+    errors.add(attribute, 'must be a valid URL') unless uri.is_a?(URI::HTTP) || uri.is_a?(URI::HTTPS)
   rescue URI::InvalidURIError
-    errors.add(:origin, 'is not a valid URL')
+    errors.add(attribute, 'is not a valid URL')
   end
 end
