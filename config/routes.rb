@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :minimized_urls, only: %i[create show], param: :origin
+      resources :minimized_urls, only: %i[create show], param: :short
         end
       end
 end
