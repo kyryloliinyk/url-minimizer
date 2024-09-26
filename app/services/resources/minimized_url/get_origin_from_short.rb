@@ -11,12 +11,19 @@ module Resources
       end
 
       def call
+        increment_visits_count
         DecompressUrl.call(short)
       end
 
       private
 
       attr_reader :short
+
+      def increment_visits_count
+        minimized_url = ::MinimizedUrl.find_by!(short:)
+        visits_count = minimized_url.visits_count
+        minimized_url.update(visits_count: visits_count + 1)
+      end
     end
   end
 end
