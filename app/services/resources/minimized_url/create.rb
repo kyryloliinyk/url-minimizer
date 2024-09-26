@@ -11,6 +11,8 @@ module Resources
       end
 
       def call
+        # raise ActiveRecord::RecordInvalid if ::MinimizedUrl.exists?(origin:)
+
         short = CompressUrl.call(origin)
 
         ::MinimizedUrl.create!(origin:, short:)

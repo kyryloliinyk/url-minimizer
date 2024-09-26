@@ -19,4 +19,12 @@ RSpec.describe Resources::MinimizedUrl::Create do
       expect { called_service }.to raise_error(ArgumentError)
     end
   end
+
+  context 'when url exists' do
+    before { called_service }
+
+    it 'dows not create new record' do
+      expect { called_service }.not_to change(MinimizedUrl, :count)
+    end
+  end
 end
