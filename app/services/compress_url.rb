@@ -14,7 +14,7 @@ class CompressUrl
 
     parsed_url = URI.parse(url)
     scheme = parsed_url.scheme
-    host = parsed_url.host
+    host = url.remove("#{scheme}://")
     short_host = encryptor.encrypt_and_sign(host)
 
     "#{scheme}://#{short_host}"

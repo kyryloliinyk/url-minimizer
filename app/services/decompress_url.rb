@@ -14,7 +14,8 @@ class DecompressUrl
 
     parsed_url = URI.parse(url)
     scheme = parsed_url.scheme
-    host = parsed_url.host
+    host = url.remove("#{scheme}://")
+
     original_host = encryptor.decrypt_and_verify(host)
 
     "#{scheme}://#{original_host}"
