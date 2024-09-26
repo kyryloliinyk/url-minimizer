@@ -3,19 +3,18 @@
 # Responsible for creating short version of origin url
 class CompressUrl
   extend Callable
-  include Compressor
 
   def initialize(url)
     @url = url
   end
 
   def call
-    raise ArgumentError unless url =~ URI::DEFAULT_PARSER.make_regexp
+    raise(ArgumentError, 'invalid url') unless url =~ URI::DEFAULT_PARSER.make_regexp
 
     parsed_url = URI.parse(url)
     scheme = parsed_url.scheme
-    host = url.remove("#{scheme}://")
-    short_host = encryptor.encrypt_and_sign(host)
+    full_host = url.remove("#{scheme}://")
+    short_host = Base64.urlsafe_encode64(full_host)
 
     "#{scheme}://#{short_host}"
   end

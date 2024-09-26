@@ -3,7 +3,6 @@
 # Responsible for creating origin version of url from short version
 class DecompressUrl
   extend Callable
-  include Compressor
 
   def initialize(url)
     @url = url
@@ -14,9 +13,8 @@ class DecompressUrl
 
     parsed_url = URI.parse(url)
     scheme = parsed_url.scheme
-    host = url.remove("#{scheme}://")
-
-    original_host = encryptor.decrypt_and_verify(host)
+    short_host = url.remove("#{scheme}://")
+    original_host = Base64.decode64(short_host)
 
     "#{scheme}://#{original_host}"
   end
