@@ -6,17 +6,21 @@ module Resources
     class Destroy
       extend Callable
 
-      def initialize(short_url)
+      def initialize(short_url:, admin_pass:)
         @short = short_url
+        @admin_pass = admin_pass
       end
 
       def call
-        ::MinimizedUrl.find_by!(short:).destroy
+        minimized_url = ::MinimizedUrl.find_by!(short:)
+        raise(ArgumentError, 'invalid password') if minimized_url.admin_pass != admin_pass
+
+        minimized_url.destroy
       end
 
       private
 
-      attr_reader :short
+      attr_reader :short, :admin_pass
     end
   end
 end
