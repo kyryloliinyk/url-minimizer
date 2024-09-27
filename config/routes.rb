@@ -3,8 +3,11 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :minimized_urls, only: %i[create show], param: :short
       get 'minimized_urls/statistics', to: 'minimized_urls#statistics'
+      resources :minimized_urls, only: %i[create show], param: :short
+      namespace :admin do
+        resources :minimized_urls, only: %i[index create destroy], param: :short
+      end
         end
       end
 end

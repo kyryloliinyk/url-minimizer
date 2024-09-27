@@ -6,7 +6,7 @@ module Api
     class MinimizedUrlsController < ApplicationController
       def show
         origin_url = Resources::MinimizedUrl::GetOriginFromShort.(show_params)
-        redirect_to origin_url, status: :moved_permanently
+        redirect_to origin_url, status: :moved_permanently, allow_other_host: true
       rescue ArgumentError
         head :bad_request
       end
@@ -18,7 +18,7 @@ module Api
         head :bad_request
       end
 
-      def statistcs
+      def statistics
         statistcs = Resources::MinimizedUrl::GetStatistics.()
         render json: statistcs, status: :ok
       end
@@ -26,7 +26,7 @@ module Api
       private
 
       def show_params
-        params.require(:short)
+        request.url
       end
 
       def create_params
