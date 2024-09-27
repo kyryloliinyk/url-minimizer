@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_09_25_100305) do
+ActiveRecord::Schema[7.2].define(version: 2024_09_27_082148) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -20,6 +20,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_25_100305) do
     t.integer "visits_count", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "admin_pass"
     t.index ["origin"], name: "index_minimized_urls_on_origin", unique: true
     t.index ["short"], name: "index_minimized_urls_on_short", unique: true
   end

@@ -12,6 +12,10 @@ RSpec.describe Resources::MinimizedUrl::Create do
     expect(called_service).to be_an_instance_of(MinimizedUrl)
   end
 
+  it 'soes not create admin_pass' do
+    expect(called_service.admin_pass).to be_nil
+  end
+
   context 'when url is not valid' do
     let(:url) { FFaker::Lorem.word }
 
