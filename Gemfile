@@ -7,6 +7,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'pg', '~> 1.5', '>= 1.5.8'
 gem 'puma', '~> 6.4', '>= 6.4.3'
 gem 'rails', '~> 7.2.1'
+gem 'pagy', '~> 9.0', '>= 9.0.9'
 
 group :development, :test do
   gem 'bullet', '~> 7.1', '>= 7.1.6'

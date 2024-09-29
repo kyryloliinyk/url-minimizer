@@ -14,3 +14,7 @@ Style/Documentation:
 # ===================== Style ====================
 Style/LambdaCall:
   Enabled: false
+Style/Documentation:
+  Enabled: true
+  Exclude:
+    - db/**/*
