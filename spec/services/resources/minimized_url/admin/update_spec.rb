@@ -13,7 +13,7 @@ RSpec.describe Resources::MinimizedUrl::Admin::Update do
       expect(MinimizedUrl.last.visits_count).to eq(visits_count)
     end
 
-    context 'when url exists an d vistis_count is a new value' do
+    context 'when url exists and visits_count is a new value' do
       let(:visits_count) { minimized_url.visits_count }
 
       it 'updates visits_count' do

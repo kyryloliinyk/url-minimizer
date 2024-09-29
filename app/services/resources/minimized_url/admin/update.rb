@@ -19,7 +19,7 @@ module Resources
 
           return if visits_count == minimized_url.visits_count
 
-          minimized_url.update!(visits_count:)
+          minimized_url if minimized_url.update!(visits_count:)
         end
 
         private

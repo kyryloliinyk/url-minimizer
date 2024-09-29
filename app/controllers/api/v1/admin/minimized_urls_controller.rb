@@ -20,10 +20,15 @@ module Api
         rescue ArgumentError
           head :bad_request
         end
+
+        def update
+          minimized_url = MinimizedUrl::Admin::Update.call(**update_params)
+          render json: serialized(AdminMinimizedUrlSerializer, minimized_url), status: :ok
+        end
   
         def destroy
-          destroyed_entity = Resources::MinimizedUrl::Destroy.(**destroy_params)
-        render json: serialized(AdminMinimizedUrlSerializer, destroyed_entity), status: :ok
+          minimized_url = Resources::MinimizedUrl::Destroy.(**destroy_params)
+        render json: serialized(AdminMinimizedUrlSerializer, minimized_url), status: :ok
         end
   
         private
@@ -37,6 +42,13 @@ module Api
   
         def create_params
           params.require(:minimized_url).require(:origin)
+        end
+
+        def update_params
+          {
+            short: params.require(:short)
+            visits_count: params.require(:minimized_url).permit(:visits_count).to_h[:visits_count]
+          }
         end
 
         def admin

@@ -6,7 +6,7 @@ Rails.application.routes.draw do
       get 'minimized_urls/statistics', to: 'minimized_urls#statistics'
       resources :minimized_urls, only: %i[create show], param: :short
       namespace :admin do
-        resources :minimized_urls, only: %i[index create destroy], param: :short
+        resources :minimized_urls, only: %i[index create update destroy], param: :short
       end
         end
       end
