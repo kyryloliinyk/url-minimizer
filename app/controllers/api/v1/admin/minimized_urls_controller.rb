@@ -9,26 +9,27 @@ module Api
 
         http_basic_authenticate_with name: admin_name, password: admin_password
 
-        def index
-          pagy, origin_urls = pagy(Resources::MinimizedUrl::GetAll.())
-          render json: { origin_urls:, pagy: }, status: :ok
-        end
-  
+        
         def create
           minized_url = Resources::MinimizedUrl::Admin::Create.(create_params)
           render json: serialized(AdminMinimizedUrlSerializer, minized_url), status: :created
         rescue ArgumentError
           head :bad_request
         end
-
+        
         def update
           minimized_url = MinimizedUrl::Admin::Update.call(**update_params)
           render json: serialized(AdminMinimizedUrlSerializer, minimized_url), status: :ok
         end
-  
+        
         def destroy
           minimized_url = Resources::MinimizedUrl::Destroy.(**destroy_params)
-        render json: serialized(AdminMinimizedUrlSerializer, minimized_url), status: :ok
+          render json: serialized(AdminMinimizedUrlSerializer, minimized_url), status: :ok
+        end
+
+        def statistics
+          pagy, origin_urls = pagy(Resources::MinimizedUrl::GetAll.())
+          render json: { origin_urls:, pagy: }, status: :ok
         end
   
         private
