@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe Resources::MinimizedUrl::GetStatistics do
-  subject(:called_service) { described_class.() }
+  subject(:called_service) { described_class.call }
 
   before do
     create_list(:minimized_url, 2)

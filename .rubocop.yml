@@ -12,8 +12,6 @@ Style/Documentation:
     - app/models/application_record.rb
     - test/test_helper.rb
 # ===================== Style ====================
-Style/LambdaCall:
-  Enabled: false
 Style/Documentation:
   Enabled: true
   Exclude:

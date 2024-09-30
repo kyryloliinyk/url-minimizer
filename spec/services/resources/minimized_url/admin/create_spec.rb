@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe Resources::MinimizedUrl::Admin::Create do
-  let(:service_call) { described_class.(origin_url) }
+  let(:service_call) { described_class.call(origin_url) }
   let(:origin_url) { attributes_for(:minimized_url)[:origin] }
 
   it 'creates new entity' do

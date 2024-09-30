@@ -11,7 +11,7 @@ module Api
         before_action :authenticate
 
         def index
-          pagy, minimized_urls = pagy(Resources::MinimizedUrl::Admin::Search.(params[:search_term]))
+          pagy, minimized_urls = pagy(Resources::MinimizedUrl::Admin::Search.call(params[:search_term]))
 
           render json: {
             minimized_urls: serialized_collection(AdminMinimizedUrlSerializer, minimized_urls),
@@ -20,7 +20,7 @@ module Api
         end
 
         def create
-          minized_url = Resources::MinimizedUrl::Admin::Create.(create_params)
+          minized_url = Resources::MinimizedUrl::Admin::Create.call(create_params)
           render json: serialized(AdminMinimizedUrlSerializer, minized_url), status: :created
         rescue ArgumentError
           head :bad_request
@@ -32,12 +32,12 @@ module Api
         end
 
         def destroy
-          minimized_url = Resources::MinimizedUrl::Destroy.(**destroy_params)
+          minimized_url = Resources::MinimizedUrl::Destroy.call(**destroy_params)
           render json: serialized(AdminMinimizedUrlSerializer, minimized_url), status: :ok
         end
 
         def statistics
-          statistcs = Resources::MinimizedUrl::GetStatistics.()
+          statistcs = Resources::MinimizedUrl::GetStatistics.call
           render json: statistcs, status: :ok
         end
 

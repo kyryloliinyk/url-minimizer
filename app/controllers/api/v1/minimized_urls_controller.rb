@@ -5,21 +5,21 @@ module Api
     # Controller to interact with MinimizedUrl entitties
     class MinimizedUrlsController < ApplicationController
       def show
-        origin_url = Resources::MinimizedUrl::GetOriginFromShort.(show_params)
+        origin_url = Resources::MinimizedUrl::GetOriginFromShort.call(show_params)
         redirect_to origin_url, status: :moved_permanently, allow_other_host: true
       rescue ArgumentError
         head :bad_request
       end
 
       def create
-        minized_url = Resources::MinimizedUrl::Create.(create_params)
+        minized_url = Resources::MinimizedUrl::Create.call(create_params)
         render json: serialized(MinimizedUrlSerializer, minized_url), status: :ok
       rescue ArgumentError
         head :bad_request
       end
 
       def statistics
-        statistcs = Resources::MinimizedUrl::GetStatistics.()
+        statistcs = Resources::MinimizedUrl::GetStatistics.call
         render json: statistcs, status: :ok
       end
 

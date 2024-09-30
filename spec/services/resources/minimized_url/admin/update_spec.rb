@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe Resources::MinimizedUrl::Admin::Update do
-  let(:service_call) { described_class.(**args) }
+  let(:service_call) { described_class.call(**args) }
   let(:args) { { short:, visits_count: } }
   let(:short) { minimized_url.short }
   let(:minimized_url) { create(:minimized_url) }
