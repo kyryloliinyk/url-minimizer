@@ -5,10 +5,8 @@ module Api
     module Admin
       # Controller to interact with MinimizedUrl entitties from admin panel
       class MinimizedUrlsController < ApplicationController
-        include ActionController::HttpAuthentication::Basic::ControllerMethods
+        include BasicAuthenticable
         include Pagy::Backend
-
-        before_action :authenticate
 
         def index
           pagy, minimized_urls = pagy(Resources::MinimizedUrl::Admin::Search.call(params[:search_term]))
@@ -42,13 +40,6 @@ module Api
         end
 
         private
-
-        def authenticate
-          admin_creds = Rails.application.credentials[:admin]
-          authenticate_or_request_with_http_basic do |username, password|
-            username == admin_creds[:username] && password == admin_creds[:password]
-          end
-        end
 
         def destroy_params
           {
