@@ -2,6 +2,8 @@
 
 # Base app controller to inherit shared behaviour from
 class ApplicationController < ActionController::API
+  rescue_from ArgumentError, with: -> { head :bad_request }
+
   private
 
   def serialized(serializer, entity)

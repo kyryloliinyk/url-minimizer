@@ -20,8 +20,6 @@ module Api
         def create
           minized_url = Resources::MinimizedUrl::Admin::Create.call(create_params)
           render json: serialized(AdminMinimizedUrlSerializer, minized_url), status: :created
-        rescue ArgumentError
-          head :bad_request
         end
 
         def update
