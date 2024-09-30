@@ -1,11 +1,10 @@
 # frozen_string_literal: true
 
+# Responsible for unused urls autodeletion logic
 class DeleteUnusedUrls
   extend Callable
 
   def call
-    MinimizedUrl.find_each do |url|
-      url.destroy if url.visits_count.zero?
-    end
+    DeleteUnusedUrlsJob.perform
   end
 end
