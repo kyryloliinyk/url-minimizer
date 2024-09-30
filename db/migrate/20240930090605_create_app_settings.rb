@@ -5,5 +5,6 @@ class CreateAppSettings < ActiveRecord::Migration[7.2]
       t.timestamps
     end
 
+    AppSetting.create
   end
 end

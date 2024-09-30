@@ -5,11 +5,11 @@
 # Application configs
 class AppSetting < ApplicationRecord
   validates :id, uniqueness: true
-  validate :settings_uniqueness
+  validate :single_entity
 
   private
 
-  def settings_uniqueness
-    errors.add(:base, 'Only one Settings record is allowed') if AppSetting.count == 1
+  def single_entity
+    errors.add(:base, 'Only one Settings record is allowed') if AppSetting.exists? && id.nil?
   end
 end
