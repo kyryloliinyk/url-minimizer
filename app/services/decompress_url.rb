@@ -21,7 +21,7 @@ class DecompressUrl
 
   def compressed_url
     url
-      .remove("#{Rails.application.config.base_url}")
+      .remove(Rails.application.config.base_url.to_s)
       .remove(api_v1_minimized_urls_path)[1..]
   end
 end

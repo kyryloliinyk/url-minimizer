@@ -18,3 +18,4 @@ Style/Documentation:
   Enabled: true
   Exclude:
     - db/**/*
+    - app/models/application_record.rb

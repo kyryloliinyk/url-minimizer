@@ -7,4 +7,8 @@ class ApplicationController < ActionController::API
   def serialized(serializer, entity)
     serializer.new(entity).as_json
   end
+
+  def serialized_collection(serializer, collection)
+    ActiveModelSerializers::SerializableResource.new(collection, each_serializer: serializer)
+  end
 end

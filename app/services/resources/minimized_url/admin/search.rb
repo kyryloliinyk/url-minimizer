@@ -7,17 +7,17 @@ module Resources
       class Search
         extend Callable
 
-        def initialize(term = nil)
-          @term = term
+        def initialize(search_term = nil)
+          @search_term = search_term
         end
 
         def call
-          ::MinimizedUrl.where('short ILIKE ?', "%#{term}%")
+          ::MinimizedUrl.where('short ILIKE ?', "%#{search_term}%")
         end
 
         private
 
-        attr_reader :term
+        attr_reader :search_term
       end
     end
   end
