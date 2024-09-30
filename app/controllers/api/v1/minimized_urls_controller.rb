@@ -19,7 +19,7 @@ module Api
       end
 
       def statistics
-        statistcs = Resources::MinimizedUrl::GetStatistics.call
+        statistcs = Resources::MinimizedUrl::GetStatistics.call(stat_limit)
         render json: statistcs, status: :ok
       end
 
@@ -31,6 +31,10 @@ module Api
 
       def create_params
         params.require(:minimized_url).require(:origin)
+      end
+
+      def stat_limit
+        params.permit(:limit)[:limit].to_i
       end
     end
   end
